@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Token Registry Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://cdn.jsdelivr.net/gh/trustwallet/assets@master/blockchains/solana/info/logo.png" alt="Solana" class="logo-img">
+                    <h1>Token Registry Explorer</h1>
+                </div>
+                <div class="header-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalTokens">0</span>
+                        <span class="stat-label">Total Tokens</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Search and Filters -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search tokens by name, symbol, or address..." class="search-input">
+                    <button id="clearSearch" class="clear-btn" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="filter-container">
+                    <select id="tagFilter" class="filter-select">
+                        <option value="">All Categories</option>
+                    </select>
+                    <button id="sortBtn" class="sort-btn">
+                        <i class="fas fa-sort"></i> Sort by Name
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state">
+            <div class="loading-spinner"></div>
+            <p>Loading Solana tokens...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-state" style="display: none;">
+            <div class="error-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h3>Unable to load tokens</h3>
+            <p>There was an error loading the token registry. Please try again later.</p>
+            <button id="retryBtn" class="retry-btn">Retry</button>
+        </div>
+
+        <!-- Results Info -->
+        <div id="resultsInfo" class="results-info" style="display: none;">
+            <span id="resultsCount">0 tokens found</span>
+        </div>
+
+        <!-- Token Grid -->
+        <section class="tokens-section">
+            <div id="tokenGrid" class="token-grid">
+                <!-- Tokens will be populated here -->
+            </div>
+        </section>
+
+        <!-- Token Details Modal -->
+        <div id="tokenModal" class="modal-overlay" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modalTokenName">Token Name</h2>
+                    <button id="closeModal" class="close-btn">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="token-info-grid">
+                        <div class="token-logo-section">
+                            <img id="modalTokenLogo" src="" alt="Token Logo" class="modal-token-logo">
+                        </div>
+                        <div class="token-details-section">
+                            <div class="detail-item">
+                                <label>Symbol:</label>
+                                <span id="modalTokenSymbol"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Address:</label>
+                                <span id="modalTokenAddress" class="address-text"></span>
+                                <button id="copyAddress" class="copy-btn" title="Copy Address">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <div class="detail-item">
+                                <label>Decimals:</label>
+                                <span id="modalTokenDecimals"></span>
+                            </div>
+                            <div class="detail-item">
+                                <label>Chain ID:</label>
+                                <span id="modalTokenChainId"></span>
+                            </div>
+                            <div class="detail-item" id="modalTokenTagsContainer" style="display: none;">
+                                <label>Tags:</label>
+                                <div id="modalTokenTags" class="tag-list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2024 Solana Token Registry Explorer. Built with the official Solana SPL Token Registry.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/solana-labs/token-list" target="_blank" rel="noopener">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
